@@ -5,7 +5,7 @@
 
       <div class="flex-container">
         <div class="about-section__picture">
-          <img src="/img/raphael.png" alt="Raphaël Picture" />
+          <!-- <img src="/img/raphael.png" alt="Raphaël Picture" /> -->
         </div>
 
         <div class="about-section__description">
@@ -50,7 +50,7 @@ b {
 .about-section .container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
 }
 
 .title {
