@@ -5,7 +5,7 @@
 
       <div class="flex-container">
         <div class="about-section__picture">
-          <!-- <img src="/img/raphael.png" alt="Raphaël Picture" /> -->
+          <img src="/img/raphael.png" alt="Raphaël Picture" />
         </div>
 
         <div class="about-section__description">
