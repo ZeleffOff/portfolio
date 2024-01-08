@@ -47,5 +47,6 @@ nav {
   font-size: 1.1rem;
 }
 .nav-links__item.active {
+  text-decoration: underline;
 }
 </style>
