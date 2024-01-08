@@ -41,7 +41,7 @@ const projects = [
     <Header />
     <AboutSection />
 
-    <div class="projects">
+    <div id="projects-section" class="projects">
       <div class="container">
         <h2 class="title">Mes Projets</h2>
 

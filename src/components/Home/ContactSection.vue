@@ -75,7 +75,7 @@ function sendMessage() {
 </script>
 
 <template>
-  <div class="contact-section">
+  <div id="contact-section" class="contact-section">
     <div class="container">
       <h2 class="title">Contact</h2>
 

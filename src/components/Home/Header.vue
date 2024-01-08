@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div class="header">
+  <div id="header-section" class="header">
     <!-- <div class="background"></div> -->
 
     <div class="container">

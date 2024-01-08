@@ -5,10 +5,10 @@
     </div>
 
     <ul class="nav_links">
-      <li class="nav-links__item active"><a href="#">Home</a></li>
-      <li class="nav-links__item"><a href="#">About me</a></li>
-      <li class="nav-links__item"><a href="#">Projects</a></li>
-      <li class="nav-links__item"><a href="#">Contact</a></li>
+      <li class="nav-links__item active"><a href="#header-section">Home</a></li>
+      <li class="nav-links__item"><a href="#about-section">About me</a></li>
+      <li class="nav-links__item"><a href="#projects-section">Projects</a></li>
+      <li class="nav-links__item"><a href="#contact-section">Contact</a></li>
     </ul>
   </nav>
 </template>
