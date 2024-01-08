@@ -2,30 +2,50 @@
 
 <template>
   <div class="header">
-    <div class="header_content">
-      <h1 class="header_content__name">
-        <span class="colored">Raphael</span> Amoro
-      </h1>
-      <p class="header_content__job">Développeur Web Junior</p>
-    </div>
+    <!-- <div class="background"></div> -->
 
-    <div class="header_buttons">
-      <button>Mes projets</button>
+    <div class="container">
+      <div class="header_content">
+        <h1 class="header_content__name">
+          <span class="colored">Raphael</span> Amoro
+        </h1>
+        <p class="header_content__job">Développeur Web Junior</p>
+      </div>
+
+      <div class="header_buttons">
+        <button>Mes projets</button>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .header {
+  overflow: hidden;
+  position: relative;
   min-height: calc(100vh - 110px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.background {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: center/cover url(/img/bg.jpg) no-repeat;
+  filter: blur(5px);
+}
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-
   gap: 20px;
+  z-index: 2;
 }
-
 .header_content {
   text-align: center;
   line-height: 1.2;
