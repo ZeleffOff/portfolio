@@ -6,10 +6,47 @@ const name = ref("");
 const lastname = ref("");
 const email = ref("");
 const message = ref("");
+const disabledButton = ref(true);
+
+function viewErrorMessage(content, state) {
+  if (state && !content) throw Error("Message error content cannot be empty !");
+
+  const errorMessage = document.querySelector("#error-msg");
+
+  errorMessage.textContent = content;
+
+  state
+    ? (errorMessage.style.display = "block")
+    : (errorMessage.style.display = "none");
+}
+function checkCredentials() {
+  const button = document.querySelector("#submit-btn");
+
+  // Messages d'erreur
+  let content = "";
+
+  if (!name.value) content += "Vous devez indiquez votre nom !";
+  else if (!lastname.value) content += "Vous devez indiquez votre prénom !";
+  else if (!email.value) content += "Vous devez indiquez votre email !";
+  else if (!message.value) content += "Vous devez indiquez votre message !";
+  // -----
+
+  if (name.value && lastname.value && email.value && message.value) {
+    viewErrorMessage(content, false);
+
+    button.classList.remove("disabled");
+    disabledButton.value = false;
+  } else if (content) {
+    button.classList.add("disabled");
+    disabledButton.value = true;
+
+    viewErrorMessage(content, true);
+  }
+}
 
 function sendMessage() {
   const templateParams = {
-    to_email: "raphaelamoro330@gmail.com",
+    to_email: process.env.VUE_APP_CONTACT_EMAIL,
     from_name: name.value,
     from_lastname: lastname.value,
     from_email: email.value,
@@ -40,28 +77,52 @@ function sendMessage() {
 <template>
   <div class="contact-section">
     <div class="container">
-      <h2>Contact</h2>
+      <h2 class="title">Contact</h2>
 
       <div class="grid">
         <div class="wrapper">
           <div class="name-wrapper">
-            <input v-model="name" class="name" placeholder="Nom" required />
+            <input
+              v-model="name"
+              class="name"
+              placeholder="Nom"
+              @input="checkCredentials"
+              required
+            />
             <input
               v-model="lastname"
               class="lastname"
               placeholder="Prénom"
+              @input="checkCredentials"
               required
             />
           </div>
-          <input v-model="email" class="email" placeholder="Email" required />
+          <input
+            v-model="email"
+            class="email"
+            placeholder="Email"
+            @input="checkCredentials"
+            required
+          />
           <textarea
             v-model="message"
             class="message"
             placeholder="Message"
+            @input="checkCredentials"
             required
           ></textarea>
 
-          <button @click="handleClick" type="submit">Envoyer</button>
+          <p id="error-msg" style="display: none">aze</p>
+
+          <button
+            @click="sendMessage()"
+            type="submit"
+            :disabled="disabledButton"
+            id="submit-btn"
+            class="disabled"
+          >
+            Envoyer
+          </button>
         </div>
       </div>
     </div>
@@ -139,5 +200,16 @@ button {
 
 button:hover {
   background-color: #45a049;
+}
+
+#submit-btn.disabled {
+  cursor: default;
+  opacity: 0.8;
+}
+
+#error-msg {
+  font-size: 1rem;
+  text-align: center;
+  color: rgb(242, 82, 82);
 }
 </style>
