@@ -1,33 +1,36 @@
 <script setup>
-import AboutSection from "../components/Home/AboutSection.vue";
-import ContactSection from "../components/Home/ContactSection.vue";
-import Header from "../components/Home/Header.vue";
-import Project from "../components/Home/Project.vue";
+import AboutSection from "@/components/Home/AboutSection.vue";
+import ContactSection from "@/components/Home/ContactSection.vue";
+import Header from "@/components/Home/Header.vue";
+import Project from "@/components/Home/Project.vue";
 
 const projects = [
   {
     name: "CV",
     description: "Un CV fait en HTML, Css.",
+    longDescription:
+      "Projet réalisé lors de ma formation au CEF. Nous devions utilisé Html et Css et reproduire la maquette d'un CV.",
     creationDate: "10 Juin 2023",
-    imagePath: "/img/space_comment.png",
-    coverImagePath: "",
+    imagePath: "/img/icon.png",
     githubRepository: "",
   },
   {
     name: "Espace Commentaire Dynamique",
     description:
       "Un espace commentaire dynamique fait avec Html, Css, Javascript.",
+    longDescription:
+      "Projet réalisé lors de ma formation au CEF. Il avait pour but de nous initié à javascript.",
     creationDate: "10 Juin 2023",
-    imagePath: "/img/space_comment.png",
-    coverImagePath: "",
+    imagePath: "/img/icon.png",
     githubRepository: "",
   },
   {
     name: "Cahier des Charges",
     description: "Mon tout premier cahier des charges.",
+    longDescription:
+      "Mon tout premier cahier des charges qui est comme tout premier projet, assez médiocre ! Réalisé sur le site Canva.",
     creationDate: "10 Juin 2023",
-    imagePath: "/img/space_comment.png",
-    coverImagePath: "",
+    imagePath: "/img/icon.png",
     githubRepository: "",
   },
 ];
@@ -48,6 +51,7 @@ const projects = [
               :key="index"
               :name="project.name"
               :description="project.description"
+              :long-description="project.longDescription"
               :cover-image-path="project.coverImagePath"
               :creation-date="project.creationDate"
               :image-path="project.imagePath"
@@ -90,5 +94,15 @@ const projects = [
   font-size: 1.7rem;
   font-weight: bold;
   margin-bottom: 20px;
+}
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 30%;
+  width: 40%;
+  height: 3px;
+  border-radius: 10px;
+  background-color: #fff;
 }
 </style>
