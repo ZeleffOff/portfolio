@@ -53,10 +53,16 @@ function closeModal() {
         </p>
       </div>
 
-      <ul class="langages">
-        <li class="langage">Html</li>
-        <li class="langage">Css</li>
-      </ul>
+      <div class="body__bottom">
+        <ul class="langages">
+          <li class="langage">Html</li>
+          <li class="langage">Css</li>
+        </ul>
+
+        <ul class="links">
+          <li class="link">Github</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -139,7 +145,18 @@ function closeModal() {
   border-radius: 5px;
 }
 
-.modal .date {
+.body__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.links {
+  list-style: none;
+}
+
+.date {
   font-weight: bold;
 }
 
