@@ -2,70 +2,104 @@
 import { ref } from "vue";
 import emailjs from "emailjs-com";
 
+// Champs du formulaire
 const name = ref("");
-const lastname = ref("");
+const lastName = ref("");
+const objectMessage = ref("");
 const email = ref("");
 const message = ref("");
+
+// Etat du bouton submit
 const disabledButton = ref(true);
 
+/**
+ * Affiche ou cache le message d'erreur du formulaire.
+ * @param {string} content - Message d'erreur à afficher.
+ * @param {boolean} state - true: Affiche le message. | false: Cache le message.
+ */
 function viewErrorMessage(content, state) {
   if (state && !content) throw Error("Message error content cannot be empty !");
 
+  // Message element
   const errorMessage = document.querySelector("#error-msg");
-
   errorMessage.textContent = content;
 
+  // Affiche ou non le message en fonction de la variable states
   state
     ? (errorMessage.style.display = "block")
     : (errorMessage.style.display = "none");
 }
+
+/**
+ * Vérifie les champs du formulaire
+ */
 function checkCredentials() {
   const button = document.querySelector("#submit-btn");
 
   // Messages d'erreur
   let content = "";
 
+  // Vérification du champ manquant
   if (!name.value) content += "Vous devez indiquez votre nom !";
-  else if (!lastname.value) content += "Vous devez indiquez votre prénom !";
+  else if (!lastName.value) content += "Vous devez indiquez votre prénom !";
   else if (!email.value) content += "Vous devez indiquez votre email !";
+  else if (!objectMessage.value)
+    content += "Vous devez indiquez l'objet du message !";
   else if (!message.value) content += "Vous devez indiquez votre message !";
   // -----
 
-  if (name.value && lastname.value && email.value && message.value) {
+  if (
+    name.value &&
+    lastName.value &&
+    objectMessage.value &&
+    email.value &&
+    message.value
+  ) {
+    // Cache le message d'erreur
     viewErrorMessage(content, false);
 
+    // Active le bouton submit
     button.classList.remove("disabled");
     disabledButton.value = false;
   } else if (content) {
+    // Désactive le bouton
     button.classList.add("disabled");
     disabledButton.value = true;
 
+    // Affiche le message d'erreur
     viewErrorMessage(content, true);
   }
 }
 
-function sendMessage() {
+/**
+ * Envoi du mail
+ */
+function sendMail() {
   const templateParams = {
-    to_email: process.env.VUE_APP_CONTACT_EMAIL,
+    to_email: import.meta.VITE_APP_CONTACT_EMAIL,
+    object: objectMessage.value,
     from_name: name.value,
-    from_lastname: lastname.value,
+    from_lastname: lastName.value,
     from_email: email.value,
     message: message.value,
   };
 
+  // Envoi du mail
   emailjs
     .send(
-      "service_nj1qqmi",
-      "template_cw0if04",
+      import.meta.env.VITE_APP_CONTACT_SERVICE_ID,
+      import.meta.env.VITE_APP_CONTACT_TEMPLATE_ID,
       templateParams,
-      "mTeB6SKFtLz-ZlXtC"
+      import.meta.env.VITE_APP_CONTACT_USER_ID
     )
     .then((response) => {
       console.log("E-mail envoyé avec succès:", response);
 
+      // Vide les champs du formulaire
       name.value = "";
-      lastname.value = "";
+      lastName.value = "";
       email.value = "";
+      objectMessage.value = "";
       message.value = "";
     })
     .catch((error) => {
@@ -90,7 +124,7 @@ function sendMessage() {
               required
             />
             <input
-              v-model="lastname"
+              v-model="lastName"
               class="lastname"
               placeholder="Prénom"
               @input="checkCredentials"
@@ -101,6 +135,13 @@ function sendMessage() {
             v-model="email"
             class="email"
             placeholder="Email"
+            @input="checkCredentials"
+            required
+          />
+          <input
+            v-model="objectMessage"
+            class="object"
+            placeholder="Objet"
             @input="checkCredentials"
             required
           />
@@ -115,7 +156,7 @@ function sendMessage() {
           <p id="error-msg" style="display: none">aze</p>
 
           <button
-            @click="sendMessage()"
+            @click="sendMail()"
             type="submit"
             :disabled="disabledButton"
             id="submit-btn"
