@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div class="nav-logo">
-      <h2>Raphaël</h2>
+      <h2 class="title">Raphaël</h2>
     </div>
 
     <ul class="nav_links">
@@ -14,6 +14,7 @@
 </template>
 
 <style scoped>
+/* Style global du composant */
 * {
   list-style: none;
   text-decoration: none;
@@ -34,7 +35,7 @@ nav {
   align-items: center;
 }
 
-.nav-logo h2 {
+.title {
   font-size: 1.7rem;
   font-weight: bold;
 }
