@@ -172,7 +172,10 @@ function sendMail() {
 
 <style scoped>
 .contact-section {
-  min-height: 50vh;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .container {
   max-width: 800px;
